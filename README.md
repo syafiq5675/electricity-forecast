@@ -102,7 +102,7 @@ The Streamlit app lets you:
 - Get consumption forecast in MWh
 - View 7-day trend chart
 
-![Interface Screenshot](screenshot.png)
+![Interface Screenshot](image/webpage.png)
 
 ## Files Structure
 ```
