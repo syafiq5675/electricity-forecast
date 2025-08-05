@@ -18,7 +18,7 @@ from model   import run_ml_pipeline
 
 def ensure_model_exists():
     if not os.path.exists('models/best_model.pkl'):
-        st.sidebar.info("🤖 Training model for first time… this takes just a few seconds")
+        st.sidebar.info("Training model for first time… this takes just a few seconds")
         
         # 1️⃣ Build features & 2️⃣ Train model as before…
         run_feature_pipeline()
@@ -27,7 +27,7 @@ def ensure_model_exists():
             st.sidebar.error("❌ Training failed—check logs in console.")
             st.stop()
         
-        st.sidebar.success(f"✅ Model trained: {best_name} (MAPE {best_metrics['MAPE']:.1f}%)")
+        st.sidebar.success(f"Model trained: {best_name} (MAPE {best_metrics['MAPE']:.1f}%)")
 
 
 

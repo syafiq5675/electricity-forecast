@@ -58,7 +58,8 @@ plotly
 ### Installation
 ```bash
 # Clone or download the project
-cd electricity-forecasting
+git clone https://github.com/syafiq5675/electricity-forecast.git
+cd electricity-forecast
 
 # Create virtual environment
 python -m venv mlenv
@@ -72,27 +73,26 @@ pip install -r requirements.txt
 
 ### Running the Code
 
-**Option 1: Use pre-trained model**
-```bash
 streamlit run src/deploy.py
 ```
 
-**Option 2: Train from scratch**
+
+* **First Launch**: Auto‑trains features & model and saves to `models/`.
+* **Subsequent**: Loads pre‑trained model instantly.
+* Open in browser: `http://localhost:8501`
+
+### **Manual Pipeline (Optional)**
+
+If you prefer step‑by‑step:
+
 ```bash
-# Step 1: Process data
-python src/data.py
-
-# Step 2: Create features  
-python src/features.py
-
-# Step 3: Train models
-python src/model.py
-
-# Step 4: Run web app
+# 1. Feature engineering
+default: python src/features.py
+# 2. Model training
+default: python src/model.py
+# 3. Launch app
 streamlit run src/deploy.py
 ```
-
-Open `http://localhost:8501` in your browser.
 
 ## Web Interface
 
