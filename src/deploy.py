@@ -13,13 +13,23 @@ import holidays
 import plotly.graph_objects as go
 import plotly.express as px
 
+from features import main          as run_feature_pipeline
+from model   import run_ml_pipeline
+
 def ensure_model_exists():
     if not os.path.exists('models/best_model.pkl'):
-        st.info("🤖 Training model for first time... this takes ~30s")
-        # Step through your feature and model scripts:
-        subprocess.run(['python', 'src/features.py'], check=True)
-        subprocess.run(['python', 'src/model.py'], check=True)
-        st.success("✅ Model trained successfully!")
+        st.sidebar.info("🤖 Training model for first time… this takes just a few seconds")
+        
+        # 1️⃣ Build features & 2️⃣ Train model as before…
+        run_feature_pipeline()
+        best_model, best_name, best_metrics = run_ml_pipeline()
+        if best_model is None:
+            st.sidebar.error("❌ Training failed—check logs in console.")
+            st.stop()
+        
+        st.sidebar.success(f"✅ Model trained: {best_name} (MAPE {best_metrics['MAPE']:.1f}%)")
+
+
 
 # Dark Glass Morphism configuration
 st.set_page_config(
@@ -626,20 +636,20 @@ def create_enhanced_trend_chart(prediction_date, prediction_hour, prediction_kwh
 
 def main():
     """Main application with modern dark glass interface"""
-    
+
     # Dark Glass Hero Header
     st.markdown("""
-    <h1 class="hero-title">⚡ Electricity Demand Forecasting</h1>
+    <p class="hero-title">⚡ Electricity Demand Forecasting</p>
     <p class="hero-subtitle">Real-time consumption prediction for grid operations and energy planning</p>
     """, unsafe_allow_html=True)
     
-    # Load model
-    model, model_info = load_forecasting_model()
-    if model is None:
-        st.stop()
-    
     # Modern Sidebar
     with st.sidebar:
+
+        model, model_info = load_forecasting_model()
+        if model is None:
+            st.stop()
+        
         st.markdown('<div class="text-glass" style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem;">⚙️ Configuration</div>', unsafe_allow_html=True)
         
         # Date and time
