@@ -96,13 +96,22 @@ streamlit run src/deploy.py
 
 ## Web Interface
 
-The Streamlit app lets you:
-- Select date and hour for prediction
-- Adjust temperature and humidity sliders
-- Get consumption forecast in MWh
-- View 7-day trend chart
+Jump straight into forecasting with these simple steps:
 
-![Interface Screenshot](image/webpage.png)
+1. **Pick Your Moment**  
+   Choose any date and hour to see the prediction.
+
+2. **Set the Weather**  
+   Slide the temperature and humidity controls to your scenario.
+
+3. **Click “Forecast”**  
+   Get instant results in MWh with one button.
+
+4. **Check the Trend**  
+   View an interactive 7-day chart of past use and future forecasts.
+
+![App Interface Screenshot](image/webpage.png)
+
 
 ## Files Structure
 ```
